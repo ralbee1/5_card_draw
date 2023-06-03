@@ -1,0 +1,22 @@
+PAGE
+    Toplevel: New_Toplevel
+        Button: Card1  
+        Button: Card2  
+        Menu Bar
+        Button: Card3  
+        Button: Card4  
+        Button: Card5  
+        Message: Winnings  
+        Message: Winnings  
+        Canvas: Banner  
+        Message: CardHeld1  
+        Message: CardHeld2  
+        Message: CardHeld3  
+        Message: CardHeld4  
+        Message: CardHeld5  
+        Button: Bet_One  
+        Button: Bet_Max  
+        Message: Current_Bet  
+        Button: Deal  
+        Button: Redraw  
+
