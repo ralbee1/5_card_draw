@@ -5,10 +5,10 @@
 INSTRUCTIONS FOR BUILDING A PIP https://pip.pypa.io/en/stable/cli/pip_wheel/
 
 Install Prequisites: py -m pip install --upgrade pip setuptools wheel twine build
-Build Pip Distributable: py -m build --wheel from the /PythonTools/ directory with this setup.py in it. #TODO: This only installs the dev version, figure out versioning.
+Build Pip Distributable: py -m build --wheel from the /PythonTools/ directory with this setup.py in it.
 
 #Developer Install: "py -m pip install -e ." from this folder.
-#User Install: 
+#User Install: Install from the global pip.
 
 To build the pip module, increment the version number in the setup.py file and run the following command, uploading the generated package in dist/ for others to install and use.
 '''
@@ -36,7 +36,7 @@ for folder in import_folders:
 '''
 
 setuptools.setup(
-    name = 'poker_5cardredraw',
+    name = 'poker_5card_redraw',
     version = os.getenv('PACKAGE_VERSION', '0.0.dev0'),
     description = 'Video Poker application for 5 card redraw poker as found in casinos.',
     author = 'Richard Albee',
