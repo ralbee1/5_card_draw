@@ -7,8 +7,8 @@ try:
 except ImportError:
     import tkinter as tk
 
-import SuperDoubleDouble
-import PAGEGUI_support
+import video_poker
+import video_poker_functions
 import os.path
 
 PlayerHand = []
@@ -43,7 +43,7 @@ def vp_start_gui():
     prog_location = os.path.split(prog_call)[0]
     root = tk.Tk()
     top = Credits (root)
-    PAGEGUI_support.init(root, top)
+    video_poker.init(root, top)
     root.mainloop()
 
 w = None
@@ -58,7 +58,7 @@ def create_Credits(rt, *args, **kwargs):
     root = rt
     w = tk.Toplevel (root)
     top = Credits (w)
-    PAGEGUI_support.init(w, top, *args, **kwargs)
+    video_poker.init(w, top, *args, **kwargs)
     return (w, top)
 
 def destroy_Credits():
@@ -91,7 +91,7 @@ class Credits:
         defaultCardImageFile = os.path.join(assetFileDirectory + '\cardBack.png')
         defaultImage = tk.PhotoImage(file=defaultCardImageFile)
 
-        #Intialize card 1
+        #Intialize card 1 (Furthest card left)
         self.Card1 = tk.Button(top)
         self.Card1.place(relx=0.016, rely=0.386, height=508, width=349)
         self.Card1.configure(activebackground="#ececec")
@@ -325,7 +325,7 @@ class Credits:
         #initialize the current bet display
         self.Current_Bet = tk.Message(top)
         self.Current_Bet.place(relx=0.391, rely=0.877, relheight=0.09, relwidth=0.178)
-        self.Current_Bet.config(font=("Courier Bold", 60))
+        self.Current_Bet.config(font=("Courier Bold", 100))
         self.Current_Bet.configure(
             background="#00008b",
             foreground="#cc3300",
@@ -375,7 +375,7 @@ class Credits:
         if dealCardButton:
             print("command deal")
             global PlayerHand, previousHand, DECK
-            PlayerHand, DECK = SuperDoubleDouble.create_hand(DECK)
+            PlayerHand, DECK = video_poker_functions.create_hand(DECK)
             self.Winning_Hand.configure(text='')
             self.Winnings.configure(text='')
 
@@ -423,7 +423,7 @@ class Credits:
             drawCardButton = False
     
             if Card1Hold is False:
-                newCard1, DECK = (SuperDoubleDouble.draw_cards(DECK, 1))
+                newCard1, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard1 = ''.join(newCard1)
                 PlayerHand[0] = newCard1
                 newCard1File = (os.path.join(assetFileDirectory, newCard1 )) + '.png'
@@ -433,7 +433,7 @@ class Credits:
                 root.update_idletasks()
 
             if Card2Hold is False:
-                newCard2, DECK = (SuperDoubleDouble.draw_cards(DECK, 1))
+                newCard2, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard2 = ''.join(newCard2)
                 PlayerHand[1] = newCard2
                 newCard2File = (os.path.join(assetFileDirectory, newCard2 )) + '.png'
@@ -443,7 +443,7 @@ class Credits:
                 root.update_idletasks()
 
             if Card3Hold is False:
-                newCard3, DECK = (SuperDoubleDouble.draw_cards(DECK, 1))
+                newCard3, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard3 = ''.join(newCard3)
                 PlayerHand[2] = newCard3
                 newCard3File = (os.path.join(assetFileDirectory, newCard3 )) + '.png'
@@ -453,7 +453,7 @@ class Credits:
                 root.update_idletasks()
 
             if Card4Hold is False:
-                newCard4, DECK = (SuperDoubleDouble.draw_cards(DECK, 1))
+                newCard4, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard4 = ''.join(newCard4)
                 PlayerHand[3] = newCard4
                 newCard4File = (os.path.join(assetFileDirectory, newCard4 )) + '.png'
@@ -464,7 +464,7 @@ class Credits:
 
             if Card5Hold is False:
                 #Draw Card
-                newCard5, DECK = (SuperDoubleDouble.draw_cards(DECK, 1))
+                newCard5, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard5 = ''.join(newCard5)
                 #Update card into hand
                 PlayerHand[4] = newCard5
@@ -480,11 +480,11 @@ class Credits:
             previousHand = True
             if previousHand is not None:
                 hand_type = ''
-                CurrentHandScore, hand_type = SuperDoubleDouble.score_hand(PlayerHand)
+                CurrentHandScore, hand_type = video_poker_functions.score_hand(PlayerHand)
                 self.Winning_Hand.configure(text=hand_type)
 
                 #Calculate and Display Winnings
-                handWinnings = SuperDoubleDouble.calculate_payout(CurrentHandScore,betAmount)
+                handWinnings = video_poker_functions.calculate_payout(CurrentHandScore,betAmount)
                 self.Winnings.configure(text=handWinnings)
 
                 #Calculate, provide, and update payout

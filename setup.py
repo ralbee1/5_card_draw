@@ -17,15 +17,15 @@ from pathlib import Path
 import setuptools
 
 requires = [
-    'boto3',
-    'credstash',
-    'psycopg2-binary',
-    'requests',
-    'pandas',
-    'numpy',
-    'configparser'
+    'tkinter',
+    'pathlib',
 ]
 
+scripts = [
+    str(Path('video_poker','video_poker.py'))
+]
+
+'''
 #Specify which scripts should be command line callable.
 scripts = []
 import_folders = ['legopython','scripts','external']
@@ -33,16 +33,16 @@ for folder in import_folders:
     for python_module in Path(folder).iterdir():
         if python_module.suffix == ".py":
             scripts.append(str(python_module))
+'''
 
 setuptools.setup(
-    name = 'legopython',
+    name = 'poker_5cardredraw',
     version = os.getenv('PACKAGE_VERSION', '0.0.dev0'),
-    description = 'Python library designed to make scripting easier with component-based development.',
+    description = 'Video Poker application for 5 card redraw poker as found in casinos.',
     author = 'Richard Albee',
     author_email='ralbee1@iwu.edu',
     packages = setuptools.find_packages(),
     install_requires = requires,
-    #entry_points = entry_points, #https://packaging.python.org/en/latest/specifications/entry-points/
     scripts = scripts,
     classifiers = [
         'Development Status :: 5 - Production/Stable',
