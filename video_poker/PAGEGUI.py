@@ -12,7 +12,6 @@ import video_poker_functions
 
 PLAYERHAND = []
 DECK = []
-CARD_HOLD = []
 
 #Variables for buttons deciding whether a card is held or redrawn.
 Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = False, False, False, False, False
@@ -20,12 +19,10 @@ Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = False, False, False, Fal
 #Variables deciding whether hand is in deal or redraw phase
 dealCardButton = True
 drawCardButton = False
-previousHand = None
 
 #Get the current directory and default the bet amount to 0.
 localFileDirectory = os.path.dirname(os.path.realpath(__file__))
 assetFileDirectory = os.path.join(localFileDirectory + '\Assets')
-betAmount = 0
 
 
 def load_player_balance(bank_file_location = localFileDirectory) -> int:
@@ -75,6 +72,9 @@ class Credits:
         top is the toplevel containing window.
         All other window objects are initialized and defined here.
         '''
+        #Initializing runtime values
+        self.bet_amount = 0
+
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85' was d9d9d9
         _fgcolor = '#000000'  # X11 color: 'black'
 
@@ -370,7 +370,7 @@ class Credits:
 
     def deal_command(self):
         '''Fucntion/Button alternating between redrawing cards or starting a new hand, and starting scoring.'''
-        global betAmount, PLAYERMONEY, dealCardButton, drawCardButton, previousHand, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, PLAYERHAND, DECK
+        global PLAYERMONEY, dealCardButton, drawCardButton, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, PLAYERHAND, DECK
 
         #If it is time to start a new hand, this function runs.
         if dealCardButton:
@@ -380,7 +380,7 @@ class Credits:
             self.Winnings.configure(text='')
 
             #Subract Bet Acount
-            PLAYERMONEY = PLAYERMONEY - (betAmount + 1)
+            PLAYERMONEY = PLAYERMONEY - (self.bet_amount + 1)
             self.CurrentCredits.configure(text=PLAYERMONEY)
 
             #Updating the image of all cards in hand
@@ -480,7 +480,7 @@ class Credits:
             self.winning_hand.configure(text=hand_type)
 
             #Calculate and Display Winnings
-            handWinnings = video_poker_functions.calculate_payout(CurrentHandScore, betAmount)
+            handWinnings = video_poker_functions.calculate_payout(CurrentHandScore, self.bet_amount)
             self.Winnings.configure(text=handWinnings)
 
             #Calculate, provide, and update payout
@@ -569,23 +569,21 @@ class Credits:
 
     def bet_max_command(self):
         '''Sets the bet to the maximum. Bet amount is 4 since we start at 0.'''
-        global betAmount
         print("Bet Max Button")
-        betAmount = 4
+        self.bet_amount = 4
         self.Current_Bet.configure(text='''5''')
 
 
     def bet_one_command(self):
         '''Increments bet by one, starting at 0. Bet amount resets to 0 if incremented beyond 4.'''
-        global betAmount
         print("Bet One Button")
 
-        if betAmount == 4:
-            betAmount = 0
+        if self.bet_amount == 4:
+            self.bet_amount = 0
             self.Current_Bet.configure(text='''1''')
         else:
-            betAmount += 1
-            self.Current_Bet.configure(text=betAmount + 1)
+            self.bet_amount += 1
+            self.Current_Bet.configure(text=self.bet_amount + 1)
 
 
     @staticmethod
