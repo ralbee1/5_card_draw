@@ -1,6 +1,6 @@
 '''Module ran to start the program, Poker: 5 Card Redraw'''
 import sys
-import os.path
+#from tkinter.constants import ANCHOR, COMMAND, NW
 
 try:
     import tkinter as tk
@@ -9,10 +9,10 @@ except ImportError:
 
 import video_poker
 import video_poker_functions
+import os.path
 
-PLAYERHAND = []
+PlayerHand = []
 DECK = []
-CARD_HOLDS = []
 
 #Variables for buttons deciding whether a card is held or redrawn.
 Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = False, False, False, False, False
@@ -23,18 +23,16 @@ drawCardButton = False
 previousHand = None
 
 #Get the current directory and default the bet amount to 0.
-local_file_directory = os.path.dirname(os.path.realpath(__file__))
-asset_file_directory = os.path.join(local_file_directory + '\Assets')
-BET_AMOUNT = 0
+localFileDirectory = os.path.dirname(os.path.realpath(__file__))
+assetFileDirectory = os.path.join(localFileDirectory + '\Assets')
+betAmount = 0
 
-def load_player_balance() -> int:
-    ''''''
-    bankStorePath = os.path.join(local_file_directory, 'bank.txt' )
-    bankStore = open(bankStorePath, 'r', encoding = 'utf-8')
-    #bankStore.close()
-    #playerMoney = bankStore.read()
-    return int(bankStore.read())
-PLAYERMONEY = load_player_balance()
+#LoadingPlayerBalance
+bankStorePath =(os.path.join(localFileDirectory, 'bank.txt' ))
+bankStore = open(bankStorePath, 'r')
+playerMoney = bankStore.read()
+bankStore.close()
+playerMoney = int(playerMoney)
 
 
 def vp_start_gui():
@@ -48,11 +46,10 @@ def vp_start_gui():
     video_poker.init(root, top)
     root.mainloop()
 
-
 w = None
-def create_credits(rt, *args, **kwargs):
+def create_Credits(rt, *args, **kwargs):
     '''Starting point when module is imported by another module.
-       Correct form of call: 'create_credits(root, *args, **kwargs)' .'''
+       Correct form of call: 'create_Credits(root, *args, **kwargs)' .'''
     global w, w_win, root
     global prog_location
     prog_call = sys.argv[0]
@@ -64,27 +61,25 @@ def create_credits(rt, *args, **kwargs):
     video_poker.init(w, top, *args, **kwargs)
     return (w, top)
 
-    
 def destroy_Credits():
     '''Destroy the window'''
     global w
     w.destroy()
     w = None
 
-
 class Credits:
     ''' '''
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
-        Top is the toplevel containing window.
+        top is the toplevel containing window.
         All other window objects are initialized and defined here.
         '''
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85' was d9d9d9
         _fgcolor = '#000000'  # X11 color: 'black'
 
         #This Section controls the game window name and color
-        top.geometry("1920x1061")
-        top.minsize(1024, 768)
+        top.geometry("1920x1061")#+1913+1
+        top.minsize(120, 1)
         top.maxsize(1920, 1080)
         top.resizable(1,  1)
         top.title("5 Card Draw")
@@ -93,8 +88,8 @@ class Credits:
         top.configure(highlightcolor="black")
 
         #global card image
-        default_cardback_image = os.path.join(asset_file_directory + '\cardBack.png')
-        default_cardback_image = tk.PhotoImage(file=default_cardback_image)
+        defaultCardImageFile = os.path.join(assetFileDirectory + '\cardBack.png')
+        defaultImage = tk.PhotoImage(file=defaultCardImageFile)
 
         #Intialize card 1 (Furthest card left)
         self.Card1 = tk.Button(top)
@@ -107,12 +102,12 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=default_cardback_image,
+            image=defaultImage,
             pady="0",
             command=self.Card1_command,
             text='''Button'''
         )
-        self.Card1.Image = default_cardback_image
+        self.Card1.Image = defaultImage
 
         #Intialize card 2
         self.Card2 = tk.Button(top)
@@ -125,12 +120,12 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=default_cardback_image,
+            image=defaultImage,
             pady="0",
             command=self.Card2_command,
             text='''Button'''
         )
-        self.Card2.Image = default_cardback_image
+        self.Card2.Image = defaultImage
 
         self.menubar = tk.Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
         top.configure(menu = self.menubar)
@@ -146,12 +141,12 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=default_cardback_image,
+            image=defaultImage,
             pady="0",
             command=self.Card3_command,
             text='''Button'''
         )
-        self.Card3.Image = default_cardback_image
+        self.Card3.Image = defaultImage
 
         #Intialize card 4
         self.Card4 = tk.Button(top)
@@ -164,12 +159,12 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=default_cardback_image,
+            image=defaultImage,
             pady="0",
             command=self.Card4_command,
             text='''Button'''
         )
-        self.Card4.Image = default_cardback_image
+        self.Card4.Image = defaultImage
 
         #Intialize card 5
         self.Card5 = tk.Button(top)
@@ -182,12 +177,12 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=default_cardback_image,
+            image=defaultImage,
             pady="0",
             command=self.Card5_command,
             text='''Button'''
         )
-        self.Card5.Image = default_cardback_image
+        self.Card5.Image = defaultImage
 
         #Initialize the bottom center display the number of winnings
         self.Winnings = tk.Message(top)
@@ -210,14 +205,14 @@ class Credits:
             foreground="#cc3300",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            text=PLAYERMONEY,
+            text=playerMoney,
             width=341
         )
 
         #Initialize the banner image at the top
         self.Banner = tk.Button(top)
         self.Banner.place(relx=0.015, rely=0.019, height=300, width=1800)
-        bannerFile = os.path.join(asset_file_directory + '\BackgroundImage3.png')
+        bannerFile = (os.path.join(assetFileDirectory + '\BackgroundImage3.png'))
         bannerImage = tk.PhotoImage(file=bannerFile)
         self.Banner.configure(
             activebackground="#ececec",
@@ -307,7 +302,7 @@ class Credits:
             highlightcolor="black",
             pady="0",
             text='''Bet One''',
-            command=self.bet_one_button
+            command=self.Bet_One_command
         )
 
         #Initialize the bet_max button
@@ -324,7 +319,7 @@ class Credits:
             highlightcolor="black",
             pady="0",
             text='''Bet Max''',
-            command=self.bet_max_button
+            command=self.Bet_Max_command
         )
 
         #initialize the current bet display
@@ -374,26 +369,26 @@ class Credits:
 
     def Deal_command(self):
         '''Fucntion/Button alternating between redrawing cards or starting a new hand, and starting scoring.'''
-        global PLAYERMONEY, dealCardButton, drawCardButton, previousHand, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, CARD_HOLDS
+        global betAmount, playerMoney, dealCardButton, drawCardButton, previousHand, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold
 
         #If it is time to start a new hand, this function runs.
         if dealCardButton:
             print("command deal")
-            global PLAYERHAND, previousHand, DECK
-            PLAYERHAND, DECK = video_poker_functions.create_hand(DECK)
+            global PlayerHand, previousHand, DECK
+            PlayerHand, DECK = video_poker_functions.create_hand(DECK)
             self.Winning_Hand.configure(text='')
             self.Winnings.configure(text='')
 
-            #Subract Bet Amount from player money to play.
-            PLAYERMONEY = PLAYERMONEY - (BET_AMOUNT + 1)
-            self.CurrentCredits.configure(text=PLAYERMONEY)
+            #Subract Bet Acount
+            playerMoney = playerMoney - (betAmount + 1)
+            self.CurrentCredits.configure(text=playerMoney)
 
             #Updating the image of all cards in hand
-            newCard1File = (os.path.join(asset_file_directory, PLAYERHAND[0] )) + '.png'
-            newCard2File = (os.path.join(asset_file_directory, PLAYERHAND[1] )) + '.png'
-            newCard3File = (os.path.join(asset_file_directory, PLAYERHAND[2] )) + '.png'
-            newCard4File = (os.path.join(asset_file_directory, PLAYERHAND[3] )) + '.png'
-            newCard5File = (os.path.join(asset_file_directory, PLAYERHAND[4] )) + '.png'
+            newCard1File = (os.path.join(assetFileDirectory, PlayerHand[0] )) + '.png'
+            newCard2File = (os.path.join(assetFileDirectory, PlayerHand[1] )) + '.png'
+            newCard3File = (os.path.join(assetFileDirectory, PlayerHand[2] )) + '.png'
+            newCard4File = (os.path.join(assetFileDirectory, PlayerHand[3] )) + '.png'
+            newCard5File = (os.path.join(assetFileDirectory, PlayerHand[4] )) + '.png'
             newCard1Image = tk.PhotoImage(file=newCard1File)
             newCard2Image = tk.PhotoImage(file=newCard2File)
             newCard3Image = tk.PhotoImage(file=newCard3File)
@@ -426,75 +421,75 @@ class Credits:
             self.Deal.configure(text='''New Hand''')
             dealCardButton = True
             drawCardButton = False
-
-            if Card1Hold is False or 'card_1_hold' not in CARD_HOLDS:
+    
+            if Card1Hold is False:
                 newCard1, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard1 = ''.join(newCard1)
-                PLAYERHAND[0] = newCard1
-                newCard1File = (os.path.join(asset_file_directory, newCard1 )) + '.png'
+                PlayerHand[0] = newCard1
+                newCard1File = (os.path.join(assetFileDirectory, newCard1 )) + '.png'
                 newCard1Image = tk.PhotoImage(file=newCard1File)
                 self.Card1.configure(image=newCard1Image)
                 self.Card1.Image = newCard1Image
                 root.update_idletasks()
 
-            if Card2Hold is False or 'card_2_hold' not in CARD_HOLDS:
+            if Card2Hold is False:
                 newCard2, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard2 = ''.join(newCard2)
-                PLAYERHAND[1] = newCard2
-                newCard2File = (os.path.join(asset_file_directory, newCard2 )) + '.png'
+                PlayerHand[1] = newCard2
+                newCard2File = (os.path.join(assetFileDirectory, newCard2 )) + '.png'
                 newCard2Image = tk.PhotoImage(file=newCard2File)
                 self.Card2.configure(image=newCard2Image)
                 self.Card2.Image = newCard2Image
                 root.update_idletasks()
 
-            if Card3Hold is False or 'card_3_hold' not in CARD_HOLDS:
+            if Card3Hold is False:
                 newCard3, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard3 = ''.join(newCard3)
-                PLAYERHAND[2] = newCard3
-                newCard3File = (os.path.join(asset_file_directory, newCard3 )) + '.png'
+                PlayerHand[2] = newCard3
+                newCard3File = (os.path.join(assetFileDirectory, newCard3 )) + '.png'
                 newCard3Image = tk.PhotoImage(file=newCard3File)
                 self.Card3.configure(image=newCard3Image)
                 self.Card3.Image = newCard3Image
                 root.update_idletasks()
 
-            if Card4Hold is False or 'card_4_hold' not in CARD_HOLDS:
+            if Card4Hold is False:
                 newCard4, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard4 = ''.join(newCard4)
-                PLAYERHAND[3] = newCard4
-                newCard4File = (os.path.join(asset_file_directory, newCard4 )) + '.png'
+                PlayerHand[3] = newCard4
+                newCard4File = (os.path.join(assetFileDirectory, newCard4 )) + '.png'
                 newCard4Image = tk.PhotoImage(file=newCard4File)
                 self.Card4.configure(image=newCard4Image)
                 self.Card4.Image = newCard4Image
                 root.update_idletasks()
 
-            if Card5Hold is False or 'card_5_hold' not in CARD_HOLDS:
+            if Card5Hold is False:
                 #Draw Card
                 newCard5, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard5 = ''.join(newCard5)
                 #Update card into hand
-                PLAYERHAND[4] = newCard5
-                newCard5File = (os.path.join(asset_file_directory, newCard5 )) + '.png'
+                PlayerHand[4] = newCard5
+                newCard5File = (os.path.join(assetFileDirectory, newCard5 )) + '.png'
                 newCard5Image = tk.PhotoImage(file=newCard5File)
                 self.Card5.configure(image=newCard5Image)
                 self.Card5.Image = newCard5Image
                 root.update_idletasks()
 
-            print(PLAYERHAND)
+            print(PlayerHand)
 
             #Need to add a comment here describing what this logic is doing.
             previousHand = True
             if previousHand is not None:
                 hand_type = ''
-                CurrentHandScore, hand_type = video_poker_functions.score_hand(PLAYERHAND)
+                CurrentHandScore, hand_type = video_poker_functions.score_hand(PlayerHand)
                 self.Winning_Hand.configure(text=hand_type)
 
                 #Calculate and Display Winnings
-                handWinnings = video_poker_functions.calculate_payout(CurrentHandScore, BET_AMOUNT)
+                handWinnings = video_poker_functions.calculate_payout(CurrentHandScore,betAmount)
                 self.Winnings.configure(text=handWinnings)
 
                 #Calculate, provide, and update payout
-                PLAYERMONEY = PLAYERMONEY + handWinnings
-                self.CurrentCredits.configure(text=PLAYERMONEY)
+                playerMoney = playerMoney + handWinnings
+                self.CurrentCredits.configure(text=playerMoney)
                 previousHand = None
 
         #Resetting Holds
@@ -503,19 +498,18 @@ class Credits:
         self.CardHeld3.configure(background="#d9d9d9")
         self.CardHeld4.configure(background="#d9d9d9")
         self.CardHeld5.configure(background="#d9d9d9")
-        Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = (False, False, False, False, False)
-        CARD_HOLDS = []
+        Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = (False,False,False,False,False)
 
     def Card1_command(self):
         '''Toggles holding or redrawing card 1'''
         print("command card one")
-        global Card1Hold, PLAYERHAND
-        print(PLAYERHAND[0])
+        global Card1Hold, PlayerHand
+        print(PlayerHand[0])
         if dealCardButton is not True:
             if Card1Hold:
                 Card1Hold = False
                 self.CardHeld1.configure(background="#d9d9d9")
-            else:
+            elif Card1Hold is False:
                 Card1Hold = True
                 self.CardHeld1.configure(background="#ff0000")
         root.update_idletasks()
@@ -523,13 +517,13 @@ class Credits:
     def Card2_command(self):
         '''Toggles holding or redrawing card 2'''
         print("command card two")
-        global Card2Hold, PLAYERHAND
-        print(PLAYERHAND[1])
+        global Card2Hold, PlayerHand
+        print(PlayerHand[1])
         if dealCardButton is not True:
             if Card2Hold:
                 Card2Hold = False
                 self.CardHeld2.configure(background="#d9d9d9")
-            else:
+            elif Card2Hold is False:
                 Card2Hold = True
                 self.CardHeld2.configure(background="#ff0000")
         root.update_idletasks()
@@ -537,13 +531,13 @@ class Credits:
     def Card3_command(self):
         '''Toggles holding or redrawing card 3'''
         print("command card three")
-        global Card3Hold,PLAYERHAND
-        print(PLAYERHAND[2])
+        global Card3Hold,PlayerHand
+        print(PlayerHand[2])
         if dealCardButton is not True:
             if Card3Hold:
                 Card3Hold = False
                 self.CardHeld3.configure(background="#d9d9d9")
-            else:
+            elif Card3Hold is False:
                 Card3Hold = True
                 self.CardHeld3.configure(background="#ff0000")
         root.update_idletasks()
@@ -551,13 +545,13 @@ class Credits:
     def Card4_command(self):
         '''Toggles holding or redrawing card 4'''
         print("command card four")
-        global Card4Hold,PLAYERHAND
-        print(PLAYERHAND[3])
+        global Card4Hold,PlayerHand
+        print(PlayerHand[3])
         if dealCardButton != True:
             if Card4Hold:
                 Card4Hold = False
                 self.CardHeld4.configure(background="#d9d9d9")
-            else:
+            elif Card4Hold is False:
                 Card4Hold = True
                 self.CardHeld4.configure(background="#ff0000")
         root.update_idletasks()
@@ -565,39 +559,40 @@ class Credits:
     def Card5_command(self):
         '''Toggles holding or redrawing card 5'''
         print("command card one")
-        global Card5Hold, PLAYERHAND
-        print(PLAYERHAND[4])
+        global Card5Hold, PlayerHand
+        print(PlayerHand[4])
         if dealCardButton is not True:
             if Card5Hold:
                 Card5Hold = False
                 self.CardHeld5.configure(background="#d9d9d9")
-            else:
+            elif Card5Hold is False:
                 Card5Hold = True
                 self.CardHeld5.configure(background="#ff0000")
         root.update_idletasks()
 
 
-    def bet_max_button(self):
+    def Bet_Max_command(self):
         '''Sets the bet to the maximum. Bet amount is 4 since we start at 0.'''
-        global BET_AMOUNT
+        global betAmount
         print("Bet Max Button")
-        BET_AMOUNT = 4
+        betAmount = 4
         self.Current_Bet.configure(text='''5''')
 
 
-    def bet_one_button(self):
+    def Bet_One_command(self):
         '''Increments bet by one, starting at 0. Bet amount resets to 0 if incremented beyond 4.'''
-        global BET_AMOUNT
+        global betAmount
         print("Bet One Button")
 
-        if BET_AMOUNT == 4:
-            BET_AMOUNT = 0
+        if(betAmount < 5):
+            betAmount = 0
             self.Current_Bet.configure(text='''1''')
         else:
-            BET_AMOUNT += 1
-            self.Current_Bet.configure(text=BET_AMOUNT + 1)
-
-
+            betAmount += 1
+            showAmount = betAmount + 1
+            self.Current_Bet.configure(text=showAmount)
+  
+    
     @staticmethod
     def popup1(event):
         ''' '''
@@ -615,6 +610,6 @@ if __name__ == '__main__':
     '''Starts the GUI and begin the program.'''
     vp_start_gui()
     bankStore = open('bank.txt', 'w')
-    PLAYERMONEY = str(PLAYERMONEY)
-    bankStore.write(PLAYERMONEY)
+    playerMoney = str(playerMoney)
+    bankStore.write(playerMoney)
     bankStore.close()

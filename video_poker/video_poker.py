@@ -14,5 +14,5 @@ def destroy_window():
     top_level = None
 
 if __name__ == '__main__':
-    import page_gui
-    page_gui.vp_start_gui()
+    import PAGEGUI
+    PAGEGUI.vp_start_gui()
