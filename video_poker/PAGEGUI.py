@@ -320,7 +320,7 @@ class Credits:
             command=self.bet_max_command
         )
 
-        #initialize the current bet display
+        #Initialize the current bet display
         self.Current_Bet = tk.Message(top)
         self.Current_Bet.place(relx=0.391, rely=0.877, relheight=0.09, relwidth=0.178)
         self.Current_Bet.config(font=("Courier Bold", 100))
@@ -366,11 +366,14 @@ class Credits:
         root.update_idletasks()
 
     def deal_command(self):
-        '''Fucntion/Button alternating between redrawing cards or starting a new hand, and starting scoring.'''
+        '''Function progressing state of the hand.
+        Alternates between redrawing cards or starting a new hand, and starting scoring.'''
         global PLAYERMONEY, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, PLAYERHAND, DECK
         print(f' Player Hand: {PLAYERHAND}')
 
-        #If it is time to start a new hand, this function runs.
+        #This list is used to update the card images for both redrawing and starting new hands.
+        card_list = [self.Card1, self.Card2, self.Card3, self.Card4, self.Card5]
+        
         if self.status_deal_button:
             print("Starting New Hand")
             #Creating player hand and clearing previous winning hand rank and winnings.
@@ -384,73 +387,33 @@ class Credits:
 
 
             #Updating the image of all cards in hand
-            hand_list = [self.Card1, self.Card2, self.Card3, self.Card4, self.Card5]
             for index, card in enumerate(PLAYERHAND):
                 new_card_file = (os.path.join(assetFileDirectory, card)) + '.png'
                 new_card_image = tk.PhotoImage(file = new_card_file)
-                hand_list[index].configure(image = new_card_image)
-                hand_list[index].image = new_card_image
+                card_list[index].configure(image = new_card_image)
+                card_list[index].image = new_card_image
 
             #change the redraw / new hand button to redraw
             self.status_deal_button = False
             self.Deal.configure(text='''Redraw''')
-
-            #RefreshInstance (Updates display)
             root.update_idletasks()
 
-        #If it is the second part of the hand, this function runs.
         else:
+            #This phase redraws cards and immediately scores the redrawn cards.
             print("Redrawing unheld cards")
 
-            if Card1Hold is False:
-                newCard1, DECK = video_poker_functions.draw_cards(DECK, 1)
-                newCard1 = ''.join(newCard1)
-                PLAYERHAND[0] = newCard1
-                newCard1File = (os.path.join(assetFileDirectory, newCard1)) + '.png'
-                newCard1Image = tk.PhotoImage(file=newCard1File)
-                self.Card1.configure(image=newCard1Image)
-                self.Card1.Image = newCard1Image
-                root.update_idletasks()
-
-            if Card2Hold is False:
-                newCard2, DECK = video_poker_functions.draw_cards(DECK, 1)
-                newCard2 = ''.join(newCard2)
-                PLAYERHAND[1] = newCard2
-                newCard2File = (os.path.join(assetFileDirectory, newCard2)) + '.png'
-                newCard2Image = tk.PhotoImage(file=newCard2File)
-                self.Card2.configure(image=newCard2Image)
-                self.Card2.Image = newCard2Image
-                root.update_idletasks()
-
-            if Card3Hold is False:
-                newCard3, DECK = video_poker_functions.draw_cards(DECK, 1)
-                newCard3 = ''.join(newCard3)
-                PLAYERHAND[2] = newCard3
-                newCard3File = (os.path.join(assetFileDirectory, newCard3)) + '.png'
-                newCard3Image = tk.PhotoImage(file=newCard3File)
-                self.Card3.configure(image=newCard3Image)
-                self.Card3.Image = newCard3Image
-                root.update_idletasks()
-
-            if Card4Hold is False:
-                newCard4, DECK = video_poker_functions.draw_cards(DECK, 1)
-                newCard4 = ''.join(newCard4)
-                PLAYERHAND[3] = newCard4
-                newCard4File = (os.path.join(assetFileDirectory, newCard4)) + '.png'
-                newCard4Image = tk.PhotoImage(file=newCard4File)
-                self.Card4.configure(image=newCard4Image)
-                self.Card4.Image = newCard4Image
-                root.update_idletasks()
-
-            if Card5Hold is False:
-                newCard5, DECK = video_poker_functions.draw_cards(DECK, 1)
-                newCard5 = ''.join(newCard5)
-                PLAYERHAND[4] = newCard5
-                newCard5File = (os.path.join(assetFileDirectory, newCard5)) + '.png'
-                newCard5Image = tk.PhotoImage(file=newCard5File)
-                self.Card5.configure(image=newCard5Image)
-                self.Card5.Image = newCard5Image
-                root.update_idletasks()
+            #Drawing new cards for each held card and updating their images.
+            card_hold_status_list = [Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold]
+            for index, card_hold_status in enumerate(card_hold_status_list):
+                if card_hold_status is False:
+                    new_card, DECK = video_poker_functions.draw_cards(DECK, 1)
+                    new_card = ''.join(new_card)
+                    PLAYERHAND[index] = new_card
+                    new_card_file = os.path.join(assetFileDirectory, new_card) + '.png'
+                    new_card_file = tk.PhotoImage(file=new_card_file)
+                    card_list[index].configure(image=new_card_file)
+                    card_list[index].Image = new_card_file
+                    root.update_idletasks()
 
             #Display the hand ranking and associated score
             hand_score, hand_type = video_poker_functions.score_hand(PLAYERHAND)
@@ -469,14 +432,13 @@ class Credits:
             self.Deal.configure(text='''New Hand''')
             self.status_deal_button = True
 
-
-        #Resetting Holds
-        self.CardHeld1.configure(background="#d9d9d9")
-        self.CardHeld2.configure(background="#d9d9d9")
-        self.CardHeld3.configure(background="#d9d9d9")
-        self.CardHeld4.configure(background="#d9d9d9")
-        self.CardHeld5.configure(background="#d9d9d9")
-        Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = (False,False,False,False,False)
+            #Resetting Holds
+            self.CardHeld1.configure(background="#d9d9d9")
+            self.CardHeld2.configure(background="#d9d9d9")
+            self.CardHeld3.configure(background="#d9d9d9")
+            self.CardHeld4.configure(background="#d9d9d9")
+            self.CardHeld5.configure(background="#d9d9d9")
+            Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = (False,False,False,False,False)
 
 
     def Card1_command(self):
@@ -568,7 +530,7 @@ class Credits:
             self.bet_amount += 1
             self.Current_Bet.configure(text=self.bet_amount + 1)
 
-
+    '''
     @staticmethod
     def popup1(event):
         ''' '''
@@ -583,7 +545,7 @@ class Credits:
             foreground="#000000"
         )
         Popupmenu1.post(event.x_root, event.y_root)
-
+    '''
 
 if __name__ == '__main__':
     '''Starts the GUI and begin the program.'''
