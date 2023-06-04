@@ -2,7 +2,7 @@
 import random
 
 
-def build_deck() -> list:
+def build_deck() -> list[str]:
     '''Create a deck of cards in suit+number format with the number being an integer and the suit is a letter:
     Heart (H)
     Spades (S)
@@ -19,24 +19,25 @@ def build_deck() -> list:
     return deck
 
 
-def shuffle_deck(cards_being_shuffled: list) -> list:
+def shuffle_deck(cards_being_shuffled: list) -> list[str]:
     '''Given a list, returns the list in a random order.'''
     print('Shuffling Deck')
     random.shuffle(cards_being_shuffled)
     return cards_being_shuffled
 
 
-def draw_cards(deck: list ,draw_number: int) -> list:
+def draw_cards(deck: list, draw_number: int) -> tuple[list[str], list[str]]:
     '''Draws cards from the deck provided. Returns hand and remaining deck '''
     print('Drawing cards to hand')
-    cardsDrawn = []
+    cards_drawn = []
     i = 0
     while i < draw_number:
-        cardsDrawn.append(deck.pop(0))
+        cards_drawn.append(deck.pop(0))
         i += 1
-    return cardsDrawn, deck
+    return cards_drawn, deck
 
-def create_hand(deck: list) -> tuple:
+
+def create_hand(deck: list) -> tuple[list[str], list[str]]:
     '''
     Provided a deck, shuffles, and creates a hand.
     Returns a tuple, (Hand,Remaining Deck)
