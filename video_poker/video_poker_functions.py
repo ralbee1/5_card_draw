@@ -29,12 +29,12 @@ def shuffle_deck(cards_being_shuffled: list) -> list:
 def draw_cards(deck: list ,draw_number: int) -> list:
     '''Draws cards from the deck provided. Returns hand and remaining deck '''
     print('Drawing cards to hand')
-    cardsDrawn = []
+    cards_drawn = []
     i = 0
     while i < draw_number:
-        cardsDrawn.append(deck.pop(0))
+        cards_drawn.append(deck.pop(0))
         i += 1
-    return cardsDrawn, deck
+    return cards_drawn, deck
 
 def create_hand(deck: list) -> tuple:
     '''
