@@ -16,10 +16,6 @@ DECK = []
 #Variables for buttons deciding whether a card is held or redrawn.
 Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = False, False, False, False, False
 
-#Variables deciding whether hand is in deal or redraw phase
-dealCardButton = True
-drawCardButton = False
-
 #Get the current directory and default the bet amount to 0.
 localFileDirectory = os.path.dirname(os.path.realpath(__file__))
 assetFileDirectory = os.path.join(localFileDirectory + '\Assets')
@@ -74,6 +70,7 @@ class Credits:
         '''
         #Initializing runtime values
         self.bet_amount = 0
+        self.status_deal_button = True #Start state as "new hand"
 
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85' was d9d9d9
         _fgcolor = '#000000'  # X11 color: 'black'
@@ -370,63 +367,46 @@ class Credits:
 
     def deal_command(self):
         '''Fucntion/Button alternating between redrawing cards or starting a new hand, and starting scoring.'''
-        global PLAYERMONEY, dealCardButton, drawCardButton, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, PLAYERHAND, DECK
+        global PLAYERMONEY, Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold, PLAYERHAND, DECK
+        print(f' Player Hand: {PLAYERHAND}')
 
         #If it is time to start a new hand, this function runs.
-        if dealCardButton:
-            print("command deal")
+        if self.status_deal_button:
+            print("Starting New Hand")
+            #Creating player hand and clearing previous winning hand rank and winnings.
             PLAYERHAND, DECK = video_poker_functions.create_hand(DECK)
             self.winning_hand.configure(text='')
             self.Winnings.configure(text='')
 
-            #Subract Bet Acount
+            #Subract Bet Amount
             PLAYERMONEY = PLAYERMONEY - (self.bet_amount + 1)
             self.CurrentCredits.configure(text=PLAYERMONEY)
 
+
             #Updating the image of all cards in hand
-            newCard1File = (os.path.join(assetFileDirectory, PLAYERHAND[0])) + '.png'
-            newCard2File = (os.path.join(assetFileDirectory, PLAYERHAND[1])) + '.png'
-            newCard3File = (os.path.join(assetFileDirectory, PLAYERHAND[2])) + '.png'
-            newCard4File = (os.path.join(assetFileDirectory, PLAYERHAND[3])) + '.png'
-            newCard5File = (os.path.join(assetFileDirectory, PLAYERHAND[4])) + '.png'
-            newCard1Image = tk.PhotoImage(file=newCard1File)
-            newCard2Image = tk.PhotoImage(file=newCard2File)
-            newCard3Image = tk.PhotoImage(file=newCard3File)
-            newCard4Image = tk.PhotoImage(file=newCard4File)
-            newCard5Image = tk.PhotoImage(file=newCard5File)
-            self.Card1.configure(image=newCard1Image)
-            self.Card2.configure(image=newCard2Image)
-            self.Card3.configure(image=newCard3Image)
-            self.Card4.configure(image=newCard4Image)
-            self.Card5.configure(image=newCard5Image)
-            self.Card1.Image = newCard1Image
-            self.Card2.Image = newCard2Image
-            self.Card3.Image = newCard3Image
-            self.Card4.Image = newCard4Image
-            self.Card5.Image = newCard5Image
+            hand_list = [self.Card1, self.Card2, self.Card3, self.Card4, self.Card5]
+            for index, card in enumerate(PLAYERHAND):
+                new_card_file = (os.path.join(assetFileDirectory, card)) + '.png'
+                new_card_image = tk.PhotoImage(file = new_card_file)
+                hand_list[index].configure(image = new_card_image)
+                hand_list[index].image = new_card_image
+
+            #change the redraw / new hand button to redraw
+            self.status_deal_button = False
+            self.Deal.configure(text='''Redraw''')
 
             #RefreshInstance (Updates display)
             root.update_idletasks()
 
-            #change the redraw / new hand button to redraw
-            dealCardButton = False
-            drawCardButton = True
-            self.Deal.configure(text='''Redraw''')
-
         #If it is the second part of the hand, this function runs.
-        elif drawCardButton:
+        else:
+            print("Redrawing unheld cards")
 
-            #change the redraw / new hand button to New Hand
-            print("command redraw")
-            self.Deal.configure(text='''New Hand''')
-            dealCardButton = True
-            drawCardButton = False
-    
             if Card1Hold is False:
                 newCard1, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard1 = ''.join(newCard1)
                 PLAYERHAND[0] = newCard1
-                newCard1File = (os.path.join(assetFileDirectory, newCard1 )) + '.png'
+                newCard1File = (os.path.join(assetFileDirectory, newCard1)) + '.png'
                 newCard1Image = tk.PhotoImage(file=newCard1File)
                 self.Card1.configure(image=newCard1Image)
                 self.Card1.Image = newCard1Image
@@ -436,7 +416,7 @@ class Credits:
                 newCard2, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard2 = ''.join(newCard2)
                 PLAYERHAND[1] = newCard2
-                newCard2File = (os.path.join(assetFileDirectory, newCard2 )) + '.png'
+                newCard2File = (os.path.join(assetFileDirectory, newCard2)) + '.png'
                 newCard2Image = tk.PhotoImage(file=newCard2File)
                 self.Card2.configure(image=newCard2Image)
                 self.Card2.Image = newCard2Image
@@ -446,7 +426,7 @@ class Credits:
                 newCard3, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard3 = ''.join(newCard3)
                 PLAYERHAND[2] = newCard3
-                newCard3File = (os.path.join(assetFileDirectory, newCard3 )) + '.png'
+                newCard3File = (os.path.join(assetFileDirectory, newCard3)) + '.png'
                 newCard3Image = tk.PhotoImage(file=newCard3File)
                 self.Card3.configure(image=newCard3Image)
                 self.Card3.Image = newCard3Image
@@ -456,7 +436,7 @@ class Credits:
                 newCard4, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard4 = ''.join(newCard4)
                 PLAYERHAND[3] = newCard4
-                newCard4File = (os.path.join(assetFileDirectory, newCard4 )) + '.png'
+                newCard4File = (os.path.join(assetFileDirectory, newCard4)) + '.png'
                 newCard4Image = tk.PhotoImage(file=newCard4File)
                 self.Card4.configure(image=newCard4Image)
                 self.Card4.Image = newCard4Image
@@ -466,26 +446,29 @@ class Credits:
                 newCard5, DECK = video_poker_functions.draw_cards(DECK, 1)
                 newCard5 = ''.join(newCard5)
                 PLAYERHAND[4] = newCard5
-                newCard5File = (os.path.join(assetFileDirectory, newCard5 )) + '.png'
+                newCard5File = (os.path.join(assetFileDirectory, newCard5)) + '.png'
                 newCard5Image = tk.PhotoImage(file=newCard5File)
                 self.Card5.configure(image=newCard5Image)
                 self.Card5.Image = newCard5Image
                 root.update_idletasks()
 
-            print(PLAYERHAND)
-
             #Display the hand ranking and associated score
-            hand_type = ''
-            CurrentHandScore, hand_type = video_poker_functions.score_hand(PLAYERHAND)
+            hand_score, hand_type = video_poker_functions.score_hand(PLAYERHAND)
             self.winning_hand.configure(text=hand_type)
 
             #Calculate and Display Winnings
-            handWinnings = video_poker_functions.calculate_payout(CurrentHandScore, self.bet_amount)
-            self.Winnings.configure(text=handWinnings)
+            hand_winnings = video_poker_functions.calculate_payout(hand_score, self.bet_amount)
+            self.Winnings.configure(text=hand_winnings)
+            print(f'Player won ${hand_winnings}')
 
-            #Calculate, provide, and update payout
-            PLAYERMONEY = PLAYERMONEY + handWinnings
+            #Provide playout to player balance and update player credit balance
+            PLAYERMONEY = PLAYERMONEY + hand_winnings
             self.CurrentCredits.configure(text=PLAYERMONEY)
+
+            #Update state to start new hand.
+            self.Deal.configure(text='''New Hand''')
+            self.status_deal_button = True
+
 
         #Resetting Holds
         self.CardHeld1.configure(background="#d9d9d9")
@@ -501,7 +484,7 @@ class Credits:
         print("command card one")
         global Card1Hold, PLAYERHAND
         print(PLAYERHAND[0])
-        if dealCardButton is not True:
+        if self.status_deal_button is not True:
             if Card1Hold:
                 Card1Hold = False
                 self.CardHeld1.configure(background="#d9d9d9")
@@ -515,7 +498,7 @@ class Credits:
         print("command card two")
         global Card2Hold, PLAYERHAND
         print(PLAYERHAND[1])
-        if dealCardButton is not True:
+        if self.status_deal_button is not True:
             if Card2Hold:
                 Card2Hold = False
                 self.CardHeld2.configure(background="#d9d9d9")
@@ -529,7 +512,7 @@ class Credits:
         print("command card three")
         global Card3Hold,PLAYERHAND
         print(PLAYERHAND[2])
-        if dealCardButton is not True:
+        if self.status_deal_button is not True:
             if Card3Hold:
                 Card3Hold = False
                 self.CardHeld3.configure(background="#d9d9d9")
@@ -543,7 +526,7 @@ class Credits:
         print("command card four")
         global Card4Hold,PLAYERHAND
         print(PLAYERHAND[3])
-        if dealCardButton != True:
+        if self.status_deal_button is not True:
             if Card4Hold:
                 Card4Hold = False
                 self.CardHeld4.configure(background="#d9d9d9")
@@ -557,7 +540,7 @@ class Credits:
         print("command card one")
         global Card5Hold, PLAYERHAND
         print(PLAYERHAND[4])
-        if dealCardButton is not True:
+        if self.status_deal_button is not True:
             if Card5Hold:
                 Card5Hold = False
                 self.CardHeld5.configure(background="#d9d9d9")

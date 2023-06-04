@@ -8,7 +8,7 @@ def build_deck() -> list[str]:
     Spades (S)
     Club (C)
     Diamond (D)'''
-    print('Building Deck')
+    #print('Building Deck')
     numbers=list(range(2,15))
     suits = ['H','S','C','D']
     deck = []
@@ -21,14 +21,14 @@ def build_deck() -> list[str]:
 
 def shuffle_deck(cards_being_shuffled: list) -> list[str]:
     '''Given a list, returns the list in a random order.'''
-    print('Shuffling Deck')
+    #print('Shuffling Deck')
     random.shuffle(cards_being_shuffled)
     return cards_being_shuffled
 
 
 def draw_cards(deck: list, draw_number: int) -> tuple[list[str], list[str]]:
     '''Draws cards from the deck provided. Returns hand and remaining deck '''
-    print('Drawing cards to hand')
+    #print('Drawing cards to hand')
     cards_drawn = []
     i = 0
     while i < draw_number:
@@ -42,7 +42,7 @@ def create_hand(deck: list) -> tuple[list[str], list[str]]:
     Provided a deck, shuffles, and creates a hand.
     Returns a tuple, (Hand,Remaining Deck)
     '''
-    print('Creating hand')
+    #print('Creating hand')
     deck = build_deck()
     deck = shuffle_deck(deck)
     return draw_cards(deck,5)
