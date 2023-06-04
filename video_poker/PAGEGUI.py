@@ -79,7 +79,7 @@ class Credits:
         _fgcolor = '#000000'  # X11 color: 'black'
 
         #This Section controls the game window name and color
-        top.geometry("1920x1061")
+        top.geometry("1920x1060")
         top.minsize(120, 1)
         top.maxsize(1920, 1080)
         top.resizable(1,  1)
@@ -89,8 +89,8 @@ class Credits:
         top.configure(highlightcolor="black")
 
         #global card image
-        defaultCardImageFile = os.path.join(assetFileDirectory + '\cardBack.png')
-        defaultImage = tk.PhotoImage(file=defaultCardImageFile)
+        default_card_back_file = os.path.join(assetFileDirectory + '\cardBack.png')
+        defaultImage = tk.PhotoImage(file=default_card_back_file)
 
         #Intialize card 1 (Furthest card left)
         self.Card1 = tk.Button(top)
@@ -494,6 +494,7 @@ class Credits:
         self.CardHeld4.configure(background="#d9d9d9")
         self.CardHeld5.configure(background="#d9d9d9")
         Card1Hold, Card2Hold, Card3Hold, Card4Hold, Card5Hold = (False,False,False,False,False)
+
 
     def Card1_command(self):
         '''Toggles holding or redrawing card 1'''
