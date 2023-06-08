@@ -98,7 +98,6 @@ The following is an guide for running 5 card redraw poker locally.
 
 ### Installation
 
-<br/>
 Developer Install:
 <br/>
 Summary: The developer install is for those who want to contribute to or clone VideoPoker-5CardRedraw.
