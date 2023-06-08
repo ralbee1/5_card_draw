@@ -174,10 +174,10 @@ class Credits:
         )
 
         #Initialize display for current credits
-        self.CurrentCredits = tk.Message(top)
-        self.CurrentCredits.place(relx=0.771, rely=0.877, relheight=0.094, relwidth=0.178)
-        self.CurrentCredits.config(font=("Courier", 55))
-        self.CurrentCredits.configure(background="#00008b",
+        self.player_credits = tk.Message(top)
+        self.player_credits.place(relx=0.771, rely=0.877, relheight=0.094, relwidth=0.178)
+        self.player_credits.config(font=("Courier", 55))
+        self.player_credits.configure(background="#00008b",
             foreground="#cc3300",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
@@ -186,11 +186,11 @@ class Credits:
         )
 
         #Initialize the banner image at the top
-        self.Banner = tk.Button(top)
-        self.Banner.place(relx=0.015, rely=0.019, height=300, width=1800)
-        bannerFile = (os.path.join(assetFileDirectory + '\BackgroundImage3.png'))
-        bannerImage = tk.PhotoImage(file=bannerFile)
-        self.Banner.configure(
+        self.banner = tk.Button(top)
+        self.banner.place(relx=0.015, rely=0.019, height=300, width=1800)
+        banner_image = (os.path.join(assetFileDirectory + '\BackgroundImage3.png'))
+        banner_image = tk.PhotoImage(file=banner_image)
+        self.banner.configure(
             activebackground="#ececec",
             activeforeground="#000000",
             background="#d9d9d9",
@@ -198,11 +198,11 @@ class Credits:
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            image=bannerImage,
+            image=banner_image,
             pady="0",
             text='''Button'''
         )
-        self.Banner.image = bannerImage
+        self.banner.image = banner_image
 
         #Initialize the button for holding card 1
         self.hold_button_1 = tk.Message(top)
@@ -361,7 +361,7 @@ class Credits:
 
             #Subract Bet Amount
             PLAYERMONEY = PLAYERMONEY - (self.bet_amount + 1)
-            self.CurrentCredits.configure(text=PLAYERMONEY)
+            self.player_credits.configure(text=PLAYERMONEY)
 
 
             #Updating the image of all cards in hand
@@ -404,7 +404,7 @@ class Credits:
 
             #Provide playout to player balance and update player credit balance
             PLAYERMONEY = PLAYERMONEY + hand_winnings
-            self.CurrentCredits.configure(text=PLAYERMONEY)
+            self.player_credits.configure(text=PLAYERMONEY)
 
             #Update state to start new hand.
             self.deal_button.configure(text='''New Hand''')
