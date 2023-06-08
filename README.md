@@ -116,7 +116,7 @@ User Install
 <br/>
 1. Automatic User Install from the Command line via PyPi.
    ```sh
-   pip install 5_card_redraw;
+   pip install 5_card_draw
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
