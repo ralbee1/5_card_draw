@@ -123,8 +123,8 @@ User Install
 
 <!-- USAGE EXAMPLES -->
 ## Usage / How to Play
-<br />
 If your python files open with Python by default then from the commmand line run:
+
   ```js
   video_poker.py;
   ```
