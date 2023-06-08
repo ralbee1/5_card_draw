@@ -99,7 +99,7 @@ The following is an guide for running 5 card redraw poker locally.
 ### Installation
 
 <br/>
-**Developer Install:**
+*Developer Install:*
 <br/>
 Summary: The developer install is for those who want to contribute to or clone VideoPoker-5CardRedraw.
 1. Clone the repo (or use Github Desktop)
@@ -113,7 +113,7 @@ Summary: The developer install is for those who want to contribute to or clone V
    ```
 
 <br/>
-**User Install**
+*User Install*
 <br/>
 1. Automatic User Install from the Command line via PyPi.
    ```js
