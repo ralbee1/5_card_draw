@@ -1,5 +1,6 @@
 '''Back end Poker functions for deck and hand creation, drawing or shuffling cards from a deck, and hand scoring.'''
 import random
+import os
 
 
 def build_deck() -> list[str]:
@@ -248,3 +249,10 @@ def calculate_payout(input_score: int, input_credits: int) -> int:
     else:
         #print('Hand does not meet minimum payout')
         return 0
+
+
+def load_player_balance(bank_file_location = os.path.dirname(os.path.realpath(__file__))) -> int:
+    '''Load the player balance from bank.txt'''
+    bank_store_path = os.path.join(bank_file_location, 'bank.txt' )
+    bank_store = open(bank_store_path, 'r', encoding = 'utf-8')
+    return int(bank_store.read())
