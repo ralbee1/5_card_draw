@@ -11,7 +11,7 @@ Publish a Pip Version to PyPi:
 0. Create an account https://pypi.org/account/register/
 1. Install Prequisites: py -m pip install --upgrade pip setuptools wheel twine build
 2. py setup.py sdist bdist_wheel
-3. python -m twine upload — repository testpypi dist/*
+3. py twine upload dist/*
 
 '''
 import os
@@ -30,7 +30,7 @@ scripts = [
 #Package setuptools pypi install for local developer installs
 setuptools.setup(
     name = '5_card_draw',
-    version = os.getenv('PACKAGE_VERSION', '0.0.dev0'),
+    version = os.getenv('PACKAGE_VERSION', '1.0.0'),
     description = 'Video Poker application for 5 Card Draw Poker',
     author = 'Richard Albee',
     author_email='Ralbee1@iwu.edu',
