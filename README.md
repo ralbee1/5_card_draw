@@ -115,7 +115,7 @@ Summary: The developer install is for those who want to contribute to or clone V
 User Install
 <br/>
 1. Automatic User Install from the Command line via PyPi.
-   ```js
+   ```sh
    pip install 5_card_redraw;
    ```
 
