@@ -25,20 +25,11 @@ scripts = [
     str(Path('video_poker','video_poker.py'))
 ]
 
-'''
-#Specify which scripts should be command line callable.
-scripts = []
-import_folders = ['legopython','scripts','external']
-for folder in import_folders:
-    for python_module in Path(folder).iterdir():
-        if python_module.suffix == ".py":
-            scripts.append(str(python_module))
-'''
 
 setuptools.setup(
-    name = 'poker_5card_redraw',
+    name = '5_card_draw',
     version = os.getenv('PACKAGE_VERSION', '0.0.dev0'),
-    description = 'Video Poker application for 5 card redraw poker as found in casinos.',
+    description = 'Video Poker application for 5 card draw poker in video poker format.',
     author = 'Richard Albee',
     author_email='ralbee1@iwu.edu',
     packages = setuptools.find_packages(),
