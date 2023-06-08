@@ -81,8 +81,6 @@
 - [ ] **Pep 8 Standards**
 - [ ] **GitHub CI/CD Pipelines**
 
-If you would like to learn more about these features, documentation is [here](https://github.com/ralbee1/VideoPoker-5CardRedraw).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
