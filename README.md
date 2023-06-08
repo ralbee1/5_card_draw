@@ -53,9 +53,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -67,23 +64,22 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
-VideoPoker-5CardRedraw designed as a 5 card redraw variant of video poker. This project was the first thing I ever did in Python as a learning experiment. Along the way I learned about creating graphical user interfaces in python and pythonic best practices.
+5 Card Draw is a playable Python 5 card draw poker application. This project served as a hands-on Python learning environment demonstrates my capacity to independently develop and publish applications in Python. On my journey, I learned about creating graphical user interfaces in python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity provided this project was balancing desired learning opportunities and refining 5 Card Draw into a polished application. I stopped when the last remaining features involved further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a symantic system over a integer score
+ 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### Built With
-
-* [![Python][python.org]][python-url]
-* [![PyPi][pypi.org]][pypi-url] PyPi
-
 ### Features
 
 - [ ] **5 Card Redraw**
+  - [ ] Modular Hand Ranking and Scoring
+  - [ ] Player Hand and Deck creation
   - [ ] Playable GUI interface
-  - [ ] Dynamic Hand Ranking and Scoring
   - [ ] Bank text file
 - [ ] **PyPi Installs**
+- [ ] **Pep 8 Standards**
+- [ ] **GitHub CI/CD Pipelines**
 
 If you would like to learn more about these features, documentation is [here](https://github.com/ralbee1/VideoPoker-5CardRedraw).
 
@@ -93,77 +89,51 @@ If you would like to learn more about these features, documentation is [here](ht
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an guide for running 5 card redraw poker locally.
+The following is an guide for running 5 card redraw poker locally.
 
 ### Prerequisites
 
-1. [Python 3.10.8](https://www.python.org/downloads/release/python-3108/)
+1. [Python 3.10.8 or Newer](https://www.python.org/downloads/release/python-3108/)
+
 
 ### Installation
 
+<br/>
 **Developer Install:**
+<br/>
 Summary: The developer install is for those who want to contribute to or clone VideoPoker-5CardRedraw.
 1. Clone the repo (or use Github Desktop)
    ```sh
    git clone https://github.com/ralbee1/VideoPoker-5CardRedraw.git
    ```
-2. Open the CLI and navigate the current working directory to where you cloned VideoPoker-5CardRedraw
+2. Open the CLI and navigate the current working directory to where you cloned VideoPoker-5CardDraw
 3. Install the Pip Package from the CLI, copy and run this command:
    ```sh
    py -m pip install -e .
    ```
 
-
+<br/>
 **User Install**
-<br />
+<br/>
 1. Automatic User Install from the Command line via PyPi.
    ```js
-   pip install VideoPoker-5CardRedraw;
+   pip install 5_card_redraw;
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Usage / How to Play
 <br />
-From the command line, run
+If your python files open with Python by default then from the commmand line run:
   ```js
   video_poker.py;
   ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- ROADMAP -->
-## Roadmap
-1. Test edge cases and pylint code.
-2. Push branch to PyPi
-3. (Optional) Utilize Flask and bootstrap to host this website in AWS.
-4. Publish and post to my projects page.
-
-
-See the [open issues](https://github.com/ralbee1/VideoPoker-5CardRedraw/issues) for a full list of proposed features (and known issues).
+The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to replace the rest. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "Deal" and start over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are absolutely welcome!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact

@@ -46,5 +46,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10'
     ],
     python_requires = '>=3.8',
-    url = "https://github.com/ralbee1/legopython"
+    url = "https://github.com/ralbee1/VideoPoker-5CardRedraw"
 )
