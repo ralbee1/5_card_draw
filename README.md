@@ -129,7 +129,7 @@ If your python files open with Python by default then from the commmand line run
   video_poker.py;
   ```
 
-The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to replace the rest. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "Deal" and start over.
+The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "Deal" and start over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
