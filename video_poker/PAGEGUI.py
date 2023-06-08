@@ -10,10 +10,6 @@ except ImportError:
 import video_poker
 import video_poker_functions
 
-PLAYERHAND = []
-DECK = []
-PLAYERMONEY = video_poker_functions.load_player_balance()
-
 local_file_directory = os.path.dirname(os.path.realpath(__file__))
 asset_file_directory = os.path.join(local_file_directory + '\Assets')
 
@@ -39,6 +35,9 @@ class Credits:
         self.bet_amount = 0
         self.status_deal_button = True #Start state as "new hand"
         self.card_hold_status = [False, False, False, False, False] #cards start unheld.
+        self.player_hand = []
+        self.deck = []
+        self.player_money = video_poker_functions.load_player_balance()
 
         _bgcolor = '#d9d9d9'
         _fgcolor = '#000000'
@@ -80,7 +79,7 @@ class Credits:
             foreground="#cc3300",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            text=PLAYERMONEY,
+            text=self.player_money,
             width=341
         )
 
@@ -163,6 +162,9 @@ class Credits:
             text='''Held'''
         )
 
+        self.menubar = tk.Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
+        top.configure(menu = self.menubar)
+
         #Intialize card 1 (Furthest card left)
         self.card_one = tk.Button(top)
         self.card_one.place(relx=0.016, rely=0.386, height=508, width=350)
@@ -198,9 +200,6 @@ class Credits:
             text='''Button'''
         )
         self.card_two.Image = default_card_back_file
-
-        self.menubar = tk.Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
-        top.configure(menu = self.menubar)
 
         #Intialize card 3
         self.card_three = tk.Button(top)
@@ -338,8 +337,7 @@ class Credits:
     def deal_command(self):
         '''Function progressing state of the hand.
         Alternates between redrawing cards or starting a new hand, and starting scoring.'''
-        global PLAYERMONEY, PLAYERHAND, DECK
-        print(f' Player Hand: {PLAYERHAND}')
+        print(f' Player Hand: {self.player_hand}')
 
         #This list is used to update the card images for both redrawing and starting new hands.
         card_list = [self.card_one, self.card_two, self.card_three, self.card_four, self.card_five]
@@ -347,16 +345,16 @@ class Credits:
         if self.status_deal_button:
             print("Starting New Hand")
             #Creating player hand and clearing previous winning hand rank and winnings.
-            PLAYERHAND, DECK = video_poker_functions.create_hand(DECK)
+            self.player_hand, self.deck = video_poker_functions.create_hand(self.deck)
             self.winning_hand.configure(text='')
             self.player_winnings_display.configure(text='')
 
             #Subract Bet Amount
-            PLAYERMONEY = PLAYERMONEY - (self.bet_amount + 1)
-            self.player_credits.configure(text=PLAYERMONEY)
+            self.player_money = self.player_money - (self.bet_amount + 1)
+            self.player_credits.configure(text=self.player_money)
 
             #Updating the image of all cards in hand
-            for index, card in enumerate(PLAYERHAND):
+            for index, card in enumerate(self.player_hand):
                 new_card_file = (os.path.join(asset_file_directory, card)) + '.png'
                 new_card_image = tk.PhotoImage(file = new_card_file)
                 card_list[index].configure(image = new_card_image)
@@ -374,9 +372,9 @@ class Credits:
             #Drawing new cards for each held card and updating their images.
             for index, card_hold_status in enumerate(self.card_hold_status):
                 if card_hold_status is False:
-                    new_card, DECK = video_poker_functions.draw_cards(DECK, 1)
+                    new_card, self.deck = video_poker_functions.draw_cards(self.deck, 1)
                     new_card = ''.join(new_card)
-                    PLAYERHAND[index] = new_card
+                    self.player_hand[index] = new_card
                     new_card_file = os.path.join(asset_file_directory, new_card) + '.png'
                     new_card_file = tk.PhotoImage(file=new_card_file)
                     card_list[index].configure(image=new_card_file)
@@ -384,7 +382,7 @@ class Credits:
                     root.update_idletasks()
 
             #Display the hand ranking and associated score
-            hand_score, hand_type = video_poker_functions.score_hand(PLAYERHAND)
+            hand_score, hand_type = video_poker_functions.score_hand(self.player_hand)
             self.winning_hand.configure(text=hand_type)
 
             #Calculate and Display Winnings
@@ -393,8 +391,8 @@ class Credits:
             print(f'Player won ${hand_winnings}')
 
             #Provide playout to player balance and update player credit balance
-            PLAYERMONEY = PLAYERMONEY + hand_winnings
-            self.player_credits.configure(text=PLAYERMONEY)
+            self.player_money = self.player_money + hand_winnings
+            self.player_credits.configure(text=self.player_money)
 
             #Update state to start new hand.
             self.deal_button.configure(text='''New Hand''')
