@@ -64,7 +64,7 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
-5 Card Draw is a playable Python 5 card draw poker application. This project served as a hands-on Python learning environment demonstrates my capacity to independently develop and publish applications in Python. On my journey, I learned about creating graphical user interfaces in python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity provided this project was balancing desired learning opportunities and refining 5 Card Draw into a polished application. I stopped when the last remaining features involved further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a symantic system over a integer score
+5 Card Draw is a playable Python 5 card draw poker application. This project served as a hands-on Python learning experience in 2021. On my journey, I learned about creating graphical user interfaces in python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity provided this project was balancing desired learning opportunities and refining 5 Card Draw into a polished application. This project is currently archived with the last remaining features involved further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a symantic system over a integer score.
  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -81,8 +81,6 @@
 - [ ] **Pep 8 Standards**
 - [ ] **GitHub CI/CD Pipelines**
 
-If you would like to learn more about these features, documentation is [here](https://github.com/ralbee1/VideoPoker-5CardRedraw).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -98,8 +96,7 @@ The following is an guide for running 5 card redraw poker locally.
 
 ### Installation
 
-<br/>
-**Developer Install:**
+Developer Install:
 <br/>
 Summary: The developer install is for those who want to contribute to or clone VideoPoker-5CardRedraw.
 1. Clone the repo (or use Github Desktop)
@@ -111,26 +108,26 @@ Summary: The developer install is for those who want to contribute to or clone V
    ```sh
    py -m pip install -e .
    ```
-
 <br/>
-**User Install**
+<br/>
+User Install
 <br/>
 1. Automatic User Install from the Command line via PyPi.
-   ```js
-   pip install 5_card_redraw;
+   ```sh
+   pip install 5_card_draw
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage / How to Play
-<br />
 If your python files open with Python by default then from the commmand line run:
+
   ```js
   video_poker.py;
   ```
 
-The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to replace the rest. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "Deal" and start over.
+The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "DEAL" and start over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
