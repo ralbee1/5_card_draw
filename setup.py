@@ -1,16 +1,18 @@
-#Package the pip according to Python documentation https://packaging.python.org/en/latest/specifications/
-#Choosing a license https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633
 '''Setup file for building a pip for a module.
 
+Local Install Process:
+
+Build Pip Distributable: py -m build --wheel from the /PythonTools/ directory with this setup.py in it. Then install from the .whl file.
 INSTRUCTIONS FOR BUILDING A PIP https://pip.pypa.io/en/stable/cli/pip_wheel/
+OR
+Developer Install: "py -m pip install -e ." from this folder.
 
-Install Prequisites: py -m pip install --upgrade pip setuptools wheel twine build
-Build Pip Distributable: py -m build --wheel from the /PythonTools/ directory with this setup.py in it.
+Publish a Pip Version to PyPi:
+0. Create an account https://pypi.org/account/register/
+1. Install Prequisites: py -m pip install --upgrade pip setuptools wheel twine build
+2. py setup.py sdist bdist_wheel
+3. python -m twine upload — repository testpypi dist/*
 
-#Developer Install: "py -m pip install -e ." from this folder.
-#User Install: Install from the global pip.
-
-To build the pip module, increment the version number in the setup.py file and run the following command, uploading the generated package in dist/ for others to install and use.
 '''
 import os
 from pathlib import Path
@@ -22,16 +24,16 @@ requires = [
 ]
 
 scripts = [
-    str(Path('video_poker','video_poker.py'))
+    str(Path('5_card_draw','video_poker.py'))
 ]
 
-
+#Package setuptools pypi install for local developer installs
 setuptools.setup(
     name = '5_card_draw',
     version = os.getenv('PACKAGE_VERSION', '0.0.dev0'),
-    description = 'Video Poker application for 5 card draw poker in video poker format.',
+    description = 'Video Poker application for 5 Card Draw Poker',
     author = 'Richard Albee',
-    author_email='ralbee1@iwu.edu',
+    author_email='Ralbee1@iwu.edu',
     packages = setuptools.find_packages(),
     install_requires = requires,
     scripts = scripts,
