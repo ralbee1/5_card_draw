@@ -134,47 +134,47 @@ def score_hand(hand: list) -> int:
     #If all cards in hand share a suit, evaluate the type of flush.
     if 5 in repeat_suit:
         if numbers ==[14,13,12,11,10]:
-            handtype = 'Royal_Flush'
+            handtype = 'ROYAL FLUSH'
             score = 135
             print(f'this hand is a {handtype}: with score: {score}')
         elif dif == 4 and max(repeat_number) == 1:
-            handtype = 'Straight_Flush'
+            handtype = 'STRAIGHT FLUSH'
             score = 120 + max(numbers)
             print(f'this hand is a {handtype}: with score: {score}')
         else:
-            handtype = 'Flush'
+            handtype = 'FLUSH'
             score = 75 + max(numbers)
             print(f'this hand is a {handtype}: with score: {score}')
 
     #Evaluate other hands in decending ranking
     elif 4 in repeat_number:
-        handtype = 'Four of a Kind'
+        handtype = 'FOUR OF A KIND'
         score = score_four_of_a_kind(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     elif sorted(repeat_number) == [2,2,3,3,3]:
-        handtype = 'Full House'
+        handtype = 'FULL HOUSE'
         score = score_full_house(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     elif dif == 4 and max(repeat_number) == 1:
-        handtype = 'Straight'
+        handtype = 'STRAIGHT'
         score = 60 + max(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     elif 3 in repeat_number:
-        handtype = 'Trips'
+        handtype = 'TRIPS'
         score = score_three_of_a_kind(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     elif repeat_number.count(2) == 4:
-        handtype = 'Two Pair'
+        handtype = 'TWO PAIR'
         score = score_two_pair(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     elif repeat_number.count(2) == 2:
-        handtype = 'Pair'
+        handtype = 'PAIR'
         score = score_pair(numbers)
         print(f'this hand is a {handtype}: with score: {score}')
     else:
-        handtype= 'High Card'
-        n = sorted(numbers,reverse=True)
-        score = n[0] + n[1]/100 + n[2]/1000 + n[3]/10000 + n[4]/100000
+        handtype= 'HIGH CARD'
+        num = sorted(numbers,reverse=True)
+        score = num[0] + num[1]/100 + num[2]/1000 + num[3]/10000 + num[4]/100000
         print(f'this hand is a {handtype}: with score: {score}')
     return score, handtype
 
