@@ -24,6 +24,7 @@ def vp_start_gui():
     video_poker.init(root, top)
     root.mainloop()
 
+
 class Credits:
     '''Class containing the GUI interface.'''
     def __init__(self, top=None):
@@ -102,145 +103,47 @@ class Credits:
         )
         self.banner.image = banner_image
 
-        #Initialize the button for holding card 1
+        self.menubar = tk.Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
+        top.configure(menu = self.menubar)
+
+        #Initialize the 1 through 5 "hold" toggle displays
         self.hold_button_1 = tk.Message(top)
         self.hold_button_1.place(relx=0.096, rely=0.358, relheight=0.024, relwidth=0.026)
-        self.hold_button_1.configure(
-            background="#d9d9d9",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            text='''Held''',
-            width=60
-        )
-
-        #Initialize the button for holding card 2
         self.hold_button_2 = tk.Message(top)
         self.hold_button_2.place(relx=0.276, rely=0.358, relheight=0.024, relwidth=0.026)
-        self.hold_button_2.configure(
-            background="#d9d9d9",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            text='''Held''',
-            width=60
-        )
-
-        #Initialize the button for holding card 3
         self.hold_button_3 = tk.Message(top)
         self.hold_button_3.place(relx=0.464, rely=0.358, relheight=0.025, relwidth=0.026)
-        self.hold_button_3.configure(
-            background="#d9d9d9",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            text='''Held''',
-            width=60
-        )
-
-        #Initialize the button for holding card 4
         self.hold_button_4 = tk.Message(top)
         self.hold_button_4.place(relx=0.651, rely=0.358, relheight=0.025, relwidth=0.026)
-        self.hold_button_4.configure(
-            background="#d9d9d9",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            text='''Held''',
-            width=60
-        )
-
-        #Initialize the button for holding card 5
         self.hold_button_5 = tk.Message(top)
         self.hold_button_5.place(relx=0.849, rely=0.358, relheight=0.025, relwidth=0.026)
-        self.hold_button_5.configure(width=60)
-        self.hold_button_5.configure(
+
+        hold_objects = [self.hold_button_1, self.hold_button_2, self.hold_button_3, self.hold_button_4, self.hold_button_5]
+        for index, hold_object in enumerate(hold_objects):
+            hold_object.configure(
             background="#d9d9d9",
             foreground="#000000",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
             text='''Held'''
         )
+            hold_object.Image = default_card_back_file
 
-        self.menubar = tk.Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
-        top.configure(menu = self.menubar)
-
-        #Intialize card 1 (Furthest card left)
+        #Intialize card 1 through 5, left to right
         self.card_one = tk.Button(top)
         self.card_one.place(relx=0.016, rely=0.386, height=508, width=350)
-        self.card_one.configure(activebackground="#ececec")
-        self.card_one.configure(
-            activeforeground="#000000",
-            background="#d9d9d9",
-            disabledforeground="#a3a3a3",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            image=default_card_back_file,
-            pady="0",
-            command= lambda: self.toggle_card_hold(1),
-            text='''Button'''
-        )
-        self.card_one.Image = default_card_back_file
-
-        #Intialize card 2
         self.card_two = tk.Button(top)
         self.card_two.place(relx=0.203, rely=0.386, height=508, width=350)
-        self.card_two.configure(
-            activebackground="#ececec",
-            activeforeground="#000000",
-            background="#d9d9d9",
-            disabledforeground="#a3a3a3",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            image=default_card_back_file,
-            pady="0",
-            command=lambda: self.toggle_card_hold(2),
-            text='''Button'''
-        )
-        self.card_two.Image = default_card_back_file
-
-        #Intialize card 3
         self.card_three = tk.Button(top)
         self.card_three.place(relx=0.391, rely=0.386, height=508, width=350)
-        self.card_three.configure(
-            activebackground="#ececec",
-            activeforeground="#000000",
-            background="#d9d9d9",
-            disabledforeground="#a3a3a3",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            image=default_card_back_file,
-            pady="0",
-            command=lambda: self.toggle_card_hold(3),
-            text='''Button'''
-        )
-        self.card_three.Image = default_card_back_file
-
-        #Intialize card 4
         self.card_four = tk.Button(top)
         self.card_four.place(relx=0.578, rely=0.386, height=508, width=350)
-        self.card_four.configure(
-            activebackground="#ececec",
-            activeforeground="#000000",
-            background="#d9d9d9",
-            disabledforeground="#a3a3a3",
-            foreground="#000000",
-            highlightbackground="#d9d9d9",
-            highlightcolor="black",
-            image=default_card_back_file,
-            pady="0",
-            command=lambda: self.toggle_card_hold(4),
-            text='''Button'''
-        )
-        self.card_four.Image = default_card_back_file
-
-        #Intialize card 5
         self.card_five = tk.Button(top)
         self.card_five.place(relx=0.766, rely=0.386, height=508, width=350)
-        self.card_five.configure(
+
+        card_objects = [self.card_one, self.card_two, self.card_three, self.card_four, self.card_five]
+        for index, card_object in enumerate(card_objects):
+            card_object.configure(
             activebackground="#ececec",
             activeforeground="#000000",
             background="#d9d9d9",
@@ -250,10 +153,10 @@ class Credits:
             highlightcolor="black",
             image=default_card_back_file,
             pady="0",
-            command=lambda: self.toggle_card_hold(5),
+            command=lambda card_count = index + 1: self.toggle_card_hold(card_count),
             text='''Button'''
         )
-        self.card_five.Image = default_card_back_file
+            card_object.Image = default_card_back_file
 
         #Initialize the bet_one button
         self.bet_one_button = tk.Button(top)
@@ -334,6 +237,7 @@ class Credits:
         #Intial update of images into client
         root.update_idletasks()
 
+
     def deal_command(self):
         '''Function progressing state of the hand.
         Alternates between redrawing cards or starting a new hand, and starting scoring.'''
@@ -398,12 +302,10 @@ class Credits:
             self.deal_button.configure(text='''New Hand''')
             self.status_deal_button = True
 
-            #Resetting Holds
-            self.hold_button_1.configure(background="#d9d9d9")
-            self.hold_button_2.configure(background="#d9d9d9")
-            self.hold_button_3.configure(background="#d9d9d9")
-            self.hold_button_4.configure(background="#d9d9d9")
-            self.hold_button_5.configure(background="#d9d9d9")
+            #Resetting Holds displays and back end values
+            hold_buttons = [self.hold_button_1, self.hold_button_2, self.hold_button_3, self.hold_button_4, self.hold_button_5]
+            for hold_button in hold_buttons:
+                hold_button.configure(background="#d9d9d9")
             self.card_hold_status = [False,False,False,False,False]
 
 
@@ -436,6 +338,7 @@ class Credits:
     def bet_one_command(self):
         '''Increments bet by one, starting at 0. Bet amount resets to 0 if incremented beyond 4.'''
         print("Bet One Button")
+
         #Disallow changing bet mid hand by checking status_deal_button
         if self.status_deal_button:
             if self.bet_amount == 4:
