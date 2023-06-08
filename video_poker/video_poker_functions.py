@@ -9,7 +9,6 @@ def build_deck() -> list[str]:
     Spades (S)
     Club (C)
     Diamond (D)'''
-    #print('Building Deck')
     numbers=list(range(2,15))
     suits = ['H','S','C','D']
     deck = []
@@ -22,14 +21,12 @@ def build_deck() -> list[str]:
 
 def shuffle_deck(cards_being_shuffled: list) -> list[str]:
     '''Given a list, returns the list in a random order.'''
-    #print('Shuffling Deck')
     random.shuffle(cards_being_shuffled)
     return cards_being_shuffled
 
 
 def draw_cards(deck: list, draw_number: int) -> tuple[list[str], list[str]]:
     '''Draws cards from the deck provided. Returns hand and remaining deck '''
-    #print('Drawing cards to hand')
     cards_drawn = []
     i = 0
     while i < draw_number:
@@ -43,7 +40,6 @@ def create_hand(deck: list) -> tuple[list[str], list[str]]:
     Provided a deck, shuffles, and creates a hand.
     Returns a tuple, (Hand,Remaining Deck)
     '''
-    #print('Creating hand')
     deck = build_deck()
     deck = shuffle_deck(deck)
     return draw_cards(deck,5)
@@ -208,46 +204,49 @@ def calculate_payout(input_score: int, input_credits: int) -> int:
     }
 
     if input_score == 135:
-        #print('Royal Flush')
         return score_dict['royal_flush']['payout'][input_credits]
+
     elif input_score > 120:
-        #print('Straight Flush')
         return score_dict['straight_flush']['payout'][input_credits]
+
     elif input_score > 119.10:
-        #print('Quad Aces plus Jack, Queen, or King kicker')
         return score_dict['quad_aces_jackqueenking_kicker']['payout'][input_credits]
+
     elif input_score > 119.4:
-        #print('Quad Aces')
         return score_dict['quad_aces']['payout'][input_credits]
+
     elif input_score > 119.0:
-        #print('Quad Aces plus two, three, or four kicker')
-        return score_dict['quad_234']['payout'][input_credits]
+        return score_dict['quad_jackqueenking_face_kicker']['payout'][input_credits]
+
     elif input_score > 110.0:
-        #print('Quad fives to Quad Kings')
         return score_dict['quad_5toking']['payout'][input_credits]
+    
+    elif input_score == 106.14 or input_score == 107.14 or input_score == 108.14:
+        return score_dict['quad_234_ace_kicker']['payout'][input_credits]
+
     elif input_score > 107.0:
-        #print('Quad twos, threes, fours')
-        return score_dict['quad_5toking']['payout'][input_credits]
+        return score_dict['quad_234']['payout'][input_credits]
+
     elif input_score > 90:
-        #print('Full House')
         return score_dict['full_house']['payout'][input_credits]
+
     elif input_score > 89.00:
-        #print('Flush')
         return score_dict['flush']['payout'][input_credits]
+
     elif input_score > 70.00:
-        #print('Straight')
         return score_dict['straight']['payout'][input_credits]
+
     elif input_score > 51:
-        #print('Trips')
         return score_dict['trips']['payout'][input_credits]
+
     elif input_score > 30:
-        #print('Two Pair')
         return score_dict['two_pair']['payout'][input_credits]
+
     elif input_score > 26:
-        #print('Pair of Jacks of Better')
         return score_dict['pair_jacks_better']['payout'][input_credits]
+
     else:
-        #print('Hand does not meet minimum payout')
+        #Hand does not meet minimum payout
         return 0
 
 
