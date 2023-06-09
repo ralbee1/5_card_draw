@@ -114,7 +114,7 @@ User Install
 <br/>
 1. Automatic User Install from the Command line via PyPi.
    ```sh
-   pip install 5-card-draw
+   pip install five-card-draw
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -124,7 +124,7 @@ User Install
 If your python files open with Python by default then from the commmand line run:
 
   ```js
-  video_poker.py;
+  5_card_draw.py;
   ```
 
 The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "DEAL" and start over.

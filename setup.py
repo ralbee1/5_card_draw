@@ -19,17 +19,19 @@ from pathlib import Path
 import setuptools
 
 requires = [
-    'tkinter',
-    'pathlib',
+    'tk',
+    'pathlib'
 ]
 
 scripts = [
-    str(Path('5_card_draw','video_poker.py'))
+    str(Path('five_card_draw','five_card_draw.py')),
+    str(Path('five_card_draw','fcd_pagegui.py')),
+    str(Path('five_card_draw','fcd_functions.py')),
 ]
 
 #Package setuptools pypi install for local developer installs
 setuptools.setup(
-    name = '5_card_draw',
+    name = 'five_card_draw',
     version = os.getenv('PACKAGE_VERSION', '1.0.0'),
     description = 'Video Poker application for 5 Card Draw Poker',
     author = 'Richard Albee',
@@ -48,5 +50,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10'
     ],
     python_requires = '>=3.8',
-    url = "https://github.com/ralbee1/VideoPoker-5CardRedraw"
+    url = "https://github.com/ralbee1/5_card_draw"
 )

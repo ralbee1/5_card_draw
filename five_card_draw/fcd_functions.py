@@ -252,6 +252,6 @@ def calculate_payout(input_score: int, input_credits: int) -> int:
 
 def load_player_balance(bank_file_location = os.path.dirname(os.path.realpath(__file__))) -> int:
     '''Load the player balance from bank.txt'''
-    bank_store_path = os.path.join(bank_file_location, 'bank.txt' )
+    bank_store_path = os.path.join(bank_file_location, 'fcd_bank.txt' )
     bank_store = open(bank_store_path, 'r', encoding = 'utf-8')
     return int(bank_store.read())

@@ -7,8 +7,8 @@ try:
 except ImportError:
     import tkinter as tk
 
-import video_poker
-import video_poker_functions
+import five_card_draw
+import fcd_functions
 
 local_file_directory = os.path.dirname(os.path.realpath(__file__))
 asset_file_directory = os.path.join(local_file_directory + '\Assets')
@@ -21,7 +21,7 @@ def vp_start_gui():
     prog_location = os.path.split(prog_call)[0]
     root = tk.Tk()
     top = Credits (root)
-    video_poker.init(root, top)
+    five_card_draw.init(root, top)
     root.mainloop()
 
 
@@ -38,7 +38,7 @@ class Credits:
         self.card_hold_status = [False, False, False, False, False] #cards start unheld.
         self.player_hand = []
         self.deck = []
-        self.player_money = video_poker_functions.load_player_balance()
+        self.player_money = fcd_functions.load_player_balance()
 
         _bgcolor = '#d9d9d9'
         _fgcolor = '#000000'
@@ -74,13 +74,13 @@ class Credits:
 
         #Initialize display for current credits
         self.player_credits = tk.Message(top)
-        self.player_credits.place(relx=0.740, rely=0.920, relheight=0.050, relwidth=0.250)
+        self.player_credits.place(relx=0.742, rely=0.920, relheight=0.050, relwidth=0.250)
         self.player_credits.config(font=("Courier", 44))
         self.player_credits.configure(background="#00008b",
             foreground="#cc3300",
             highlightbackground="#d9d9d9",
             highlightcolor="black",
-            text=f'CREDITS',
+            text='CREDITS',
             width=550
         )
 
@@ -248,7 +248,7 @@ class Credits:
         if self.status_deal_button:
             print("Starting New Hand")
             #Creating player hand and clearing previous winning hand rank and winnings.
-            self.player_hand, self.deck = video_poker_functions.create_hand(self.deck)
+            self.player_hand, self.deck = fcd_functions.create_hand(self.deck)
             self.winning_hand.configure(text='', background="#00008b")
             self.player_winnings_display.configure(text='')
 
@@ -275,7 +275,7 @@ class Credits:
             #Drawing new cards for each held card and updating their images.
             for index, card_hold_status in enumerate(self.card_hold_status):
                 if card_hold_status is False:
-                    new_card, self.deck = video_poker_functions.draw_cards(self.deck, 1)
+                    new_card, self.deck = fcd_functions.draw_cards(self.deck, 1)
                     new_card = ''.join(new_card)
                     self.player_hand[index] = new_card
                     new_card_file = os.path.join(asset_file_directory, new_card) + '.png'
@@ -285,11 +285,11 @@ class Credits:
                     root.update_idletasks()
 
             #Display the hand ranking and associated score
-            hand_score, hand_type = video_poker_functions.score_hand(self.player_hand)
+            hand_score, hand_type = fcd_functions.score_hand(self.player_hand)
             self.winning_hand.configure(text=hand_type, background="#E7E72B")
 
             #Calculate and Display Winnings
-            hand_winnings = video_poker_functions.calculate_payout(hand_score, self.bet_amount)
+            hand_winnings = fcd_functions.calculate_payout(hand_score, self.bet_amount)
             self.player_winnings_display.configure(text=f"WIN   {hand_winnings}")
             print(f'Player won ${hand_winnings}')
 
