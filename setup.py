@@ -31,7 +31,7 @@ scripts = [
 #Using distutils.core over setuptools since package data was not specified correctly, needing the manifest.in file
 setup(
     name = 'five_card_draw',
-    version = os.getenv('PACKAGE_VERSION', '1.0.8'),
+    version = os.getenv('PACKAGE_VERSION', '1.1.0'),
     author = 'Richard Albee',
     author_email='Ralbee1@iwu.edu',
     packages=['five_card_draw','five_card_draw.data'],
