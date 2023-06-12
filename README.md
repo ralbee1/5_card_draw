@@ -64,7 +64,7 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
-5 Card Draw is a playable Python 5 card draw poker application. This project served as a hands-on Python learning experience in 2021. On my journey, I learned about creating graphical user interfaces in python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity provided this project was balancing desired learning opportunities and refining 5 Card Draw into a polished application. This project is currently archived with the last remaining features involved further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a symantic system over a integer score.
+5 Card Draw is a playable Python 5-card draw poker application. This project served as a hands-on Python learning experience in 2021. On my journey, I learned about creating graphical user interfaces in Python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity this project provided was balancing desired learning opportunities and refining 5 Card Draw into a polished application. This project archived with the last remaining features involved in further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a semantic system over an integer score.
  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -133,7 +133,7 @@ Troubleshooting:
   For example: C:\Users\{username}\AppData\Roaming\Python\{pythonversion}\Scripts
   You may also navigate to where the pip was installed and run poker_start.py with python manually.
 
-The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "DEAL" and start over.
+The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits paid out. You may then click "DEAL" and start over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
