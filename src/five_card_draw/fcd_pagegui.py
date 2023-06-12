@@ -1,17 +1,11 @@
 '''Module ran to start the program, Poker: 5 Card Redraw'''
 import sys
 import os.path
-
-try:
-    import tkinter as tk
-except ImportError:
-    import tkinter as tk
-
-import five_card_draw
-import fcd_functions
+import tkinter as tk
+from five_card_draw import poker_start, fcd_functions
 
 local_file_directory = os.path.dirname(os.path.realpath(__file__))
-asset_file_directory = os.path.join(local_file_directory + '\Assets')
+asset_file_directory = os.path.join(local_file_directory + '\data')
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
@@ -21,7 +15,7 @@ def vp_start_gui():
     prog_location = os.path.split(prog_call)[0]
     root = tk.Tk()
     top = Credits (root)
-    five_card_draw.init(root, top)
+    poker_start.init(root, top)
     root.mainloop()
 
 

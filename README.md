@@ -96,12 +96,12 @@ The following is an guide for running 5 card redraw poker locally.
 
 ### Installation
 
-Developer Install:
+Local Repo Install:
 <br/>
 Summary: The developer install is for those who want to contribute to or clone VideoPoker-5CardRedraw.
 1. Clone the repo (or use Github Desktop)
    ```sh
-   git clone https://github.com/ralbee1/VideoPoker-5CardRedraw.git
+   git clone https://github.com/ralbee1/5_card_draw.git
    ```
 2. Open the CLI and navigate the current working directory to where you cloned VideoPoker-5CardDraw
 3. Install the Pip Package from the CLI, copy and run this command:

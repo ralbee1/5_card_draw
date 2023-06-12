@@ -11,44 +11,37 @@ Publish a Pip Version to PyPi:
 0. Create an account https://pypi.org/account/register/
 1. Install Prequisites: py -m pip install --upgrade pip setuptools wheel twine build
 2. py setup.py sdist bdist_wheel
-3. py twine upload dist/*
+3. py -m twine upload dist/*
 
+
+setuptools reference guide: https://docs.python.org/3/distutils/setupscript.html#installing-package-data
 '''
 import os
 from pathlib import Path
-import setuptools
+from distutils.core import setup
 
-requires = [
+required_dependencies = [
     'tk',
     'pathlib'
 ]
-
 scripts = [
-    str(Path('five_card_draw','five_card_draw.py')),
-    str(Path('five_card_draw','fcd_pagegui.py')),
-    str(Path('five_card_draw','fcd_functions.py')),
+    str(Path('src/five_card_draw','poker_start.py'))
 ]
 
-#Package setuptools pypi install for local developer installs
-setuptools.setup(
+#Using distutils.core over setuptools since package data was not specified correctly, needing the manifest.in file
+setup(
     name = 'five_card_draw',
-    version = os.getenv('PACKAGE_VERSION', '1.0.0'),
-    description = 'Video Poker application for 5 Card Draw Poker',
+    version = os.getenv('PACKAGE_VERSION', '1.0.6'),
     author = 'Richard Albee',
     author_email='Ralbee1@iwu.edu',
-    packages = setuptools.find_packages(),
-    install_requires = requires,
-    scripts = scripts,
-    classifiers = [
-        'Development Status :: 5 - Production/Stable',
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10'
-    ],
-    python_requires = '>=3.8',
-    url = "https://github.com/ralbee1/5_card_draw"
+    packages=['five_card_draw','five_card_draw.data'],
+    package_dir={'five_card_draw': 'src/five_card_draw'},
+    package_data={'five_card_draw': ['data/*.png','*.txt']},
+    scripts=scripts,
+    url = "https://github.com/ralbee1/5_card_draw",
+    license='LICENSE.txt',
+    description='5 Card Draw Video Poker application',
+    long_description_content_type = 'text/markdown',
+    long_description=open('README.md', encoding='utf-8').read(),
+    install_requires=required_dependencies
 )
