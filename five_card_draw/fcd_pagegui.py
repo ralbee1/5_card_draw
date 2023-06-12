@@ -39,8 +39,8 @@ class Credits:
 
         #This Section controls the game window name and color
         top.geometry("1920x1080")
-        top.minsize(1920, 1080)
-        top.maxsize(1920, 1080)
+        top.minsize(1800, 1080)
+        top.maxsize(1800, 1080)
         top.resizable(1,  1)
         top.title("5 Card Draw")
         top.configure(
@@ -55,7 +55,7 @@ class Credits:
 
         #Initialize the bottom center display the number of winnings
         self.player_winnings_display = tk.Message(top)
-        self.player_winnings_display.place(relx=0.009, rely=0.905, relheight=0.093, relwidth=0.178)
+        self.player_winnings_display.place(relx=0.000, rely=0.905, relheight=0.093, relwidth=0.178)
         self.player_winnings_display.config(font=("Courier Bold", 55))
         self.player_winnings_display.configure(
             background="#00008b",
@@ -80,7 +80,7 @@ class Credits:
 
         #Initialize the banner image at the top
         self.banner = tk.Button(top)
-        self.banner.place(relx=0.030, rely=0.000, height=400, width=1800)
+        self.banner.place(relx=0.000, rely=0.000, height=400, width=1800)
         banner_image = os.path.join(asset_file_directory + '\ScoringImage.png')
         banner_image = tk.PhotoImage(file=banner_image)
         self.banner.configure(
@@ -119,21 +119,21 @@ class Credits:
                 foreground="#000000",
                 highlightbackground="#d9d9d9",
                 highlightcolor="black",
-                text=''' '''
+                text=''' ''',
             )
             hold_object.Image = default_card_back_file
 
         #Intialize card 1 through 5, left to right
         self.card_one = tk.Button(top)
-        self.card_one.place(relx=0.032, rely=0.430, height=508, width=350)
+        self.card_one.place(relx=0.014, rely=0.430, height=508, width=350)
         self.card_two = tk.Button(top)
-        self.card_two.place(relx=0.219, rely=0.430, height=508, width=350)
+        self.card_two.place(relx=0.209, rely=0.430, height=508, width=350)
         self.card_three = tk.Button(top)
-        self.card_three.place(relx=0.407, rely=0.430, height=508, width=350)
+        self.card_three.place(relx=0.404, rely=0.430, height=508, width=350)
         self.card_four = tk.Button(top)
-        self.card_four.place(relx=0.594, rely=0.430, height=508, width=350)
+        self.card_four.place(relx=0.599, rely=0.430, height=508, width=350)
         self.card_five = tk.Button(top)
-        self.card_five.place(relx=0.782, rely=0.430, height=508, width=350)
+        self.card_five.place(relx=0.794, rely=0.430, height=508, width=350)
 
         card_objects = [self.card_one, self.card_two, self.card_three, self.card_four, self.card_five]
         for index, card_object in enumerate(card_objects):
@@ -154,7 +154,7 @@ class Credits:
 
         #Initialize the bet_one button
         self.bet_one_button = tk.Button(top)
-        self.bet_one_button.place(relx=0.185, rely=0.905, height=90, width=230)
+        self.bet_one_button.place(relx=0.180, rely=0.905, height=90, width=230)
         self.bet_one_button.config(font=("Courier Bold", 38))
         self.bet_one_button.configure(
             activebackground="#ececec",
@@ -201,7 +201,7 @@ class Credits:
 
         #initialize the deal and redraw button
         self.deal_button = tk.Button(top)
-        self.deal_button.place(relx=0.625, rely=0.905, height=90, width=250)
+        self.deal_button.place(relx=0.615, rely=0.905, height=90, width=250)
         self.deal_button.config(font=("Courier Bold", 40))
         self.deal_button.configure(
             activebackground="#ececec",
@@ -218,7 +218,7 @@ class Credits:
 
         #Initialize winning Hand banner in top center
         self.winning_hand = tk.Message(top)
-        self.winning_hand.place(relx=0.350, rely=0.365, relheight=0.045, relwidth=0.300)
+        self.winning_hand.place(relx=0.350, rely=0.370, relheight=0.045, relwidth=0.300)
         self.winning_hand.config(font=("Courier Bold", 44))
         self.winning_hand.configure(
             background="#E7E72B",

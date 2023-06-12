@@ -25,17 +25,17 @@ required_dependencies = [
     'pathlib'
 ]
 scripts = [
-    str(Path('src/five_card_draw','poker_start.py'))
+    str(Path('five_card_draw','poker_start.py'))
 ]
 
 #Using distutils.core over setuptools since package data was not specified correctly, needing the manifest.in file
 setup(
     name = 'five_card_draw',
-    version = os.getenv('PACKAGE_VERSION', '1.0.7'),
+    version = os.getenv('PACKAGE_VERSION', '1.0.8'),
     author = 'Richard Albee',
     author_email='Ralbee1@iwu.edu',
     packages=['five_card_draw','five_card_draw.data'],
-    package_dir={'five_card_draw': 'src/five_card_draw'},
+    package_dir={'five_card_draw': 'five_card_draw'},
     package_data={'five_card_draw': ['data/*.png','*.txt']},
     scripts=scripts,
     url = "https://github.com/ralbee1/5_card_draw",
