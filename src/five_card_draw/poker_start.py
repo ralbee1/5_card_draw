@@ -14,5 +14,5 @@ def destroy_window():
     top_level = None
 
 if __name__ == '__main__':
-    import fcd_pagegui
+    from five_card_draw import fcd_pagegui
     fcd_pagegui.vp_start_gui()

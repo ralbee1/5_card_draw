@@ -124,8 +124,14 @@ User Install
 If your python files open with Python by default then from the commmand line run:
 
   ```js
-  5_card_draw.py;
+  poker_start.py;
   ```
+
+Troubleshooting:
+1. "'poker_start.py' is not recognized as an internal or external command, operable program or batch file."
+  Your terminal needs to be able to find the file. For windows, you need to ensure your python "script" folder is in your path variable
+  For example: C:\Users\{username}\AppData\Roaming\Python\{pythonversion}\Scripts
+  You may also navigate to where the pip was installed and run poker_start.py with python manually.
 
 The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits are payed out. You may then click "DEAL" and start over.
 
