@@ -64,7 +64,7 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
-5 Card Draw is a playable Python 5-card draw poker application. This project served as a hands-on Python learning experience in 2021. On my journey, I learned about creating graphical user interfaces in Python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity this project provided was balancing desired learning opportunities and refining 5 Card Draw into a polished application. This project archived with the last remaining features involved in further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a semantic system over an integer score.
+Five-card Draw is a playable Python poker application. This project served as a hands-on Python learning experience in 2021. On my journey, I learned about creating graphical user interfaces in Python, pythonic best practices, CI/CD workflows, PyPi deployments, and much more. The beautiful learning opportunity this project provided was balancing desired learning opportunities and refining 5 Card Draw into a polished application. This project archived with the last remaining features involved in further polishing the UI/UX experience, adding sound, and cashing out player credits. If I were to start over, I'd rank poker hands with a semantic system over an integer score.
  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
