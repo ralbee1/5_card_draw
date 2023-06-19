@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ralbee1/VideoPoker-5CardRedraw">
-    <img src="documentation/logo.png" alt="Logo" width="160" height="160">
+    <img src="documentation/logo.png" alt="Logo" width="320" height="320">
   </a>
 
 <h3 align="center">VideoPoker-5CardRedraw</h3>
