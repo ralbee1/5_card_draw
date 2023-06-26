@@ -133,6 +133,7 @@ Troubleshooting:
   For example: C:\Users\{username}\AppData\Roaming\Python\{pythonversion}\Scripts
   You may also navigate to where the pip was installed and run poker_start.py with python manually.
 
+How to Play:
 The game is played by aiming to make the best poker hand possible. The top of the interface shows the hand ranking and the payouts sorted by how many credits you bet per round, 1 thru 5. To begin, click DEAL. You hold cards with the intent of keeping them and drawing new cards to try to improve your hand ranking. After drawing new cards, your hand is automatically scored and profits paid out. You may then click "DEAL" and start over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
