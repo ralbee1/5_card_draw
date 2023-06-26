@@ -128,8 +128,8 @@ If your python files open with Python by default then from the commmand line run
   ```
 
 Troubleshooting:
-1. "'poker_start.py' is not recognized as an internal or external command, operable program or batch file."
-  Your terminal needs to be able to find the file. For windows, you need to ensure your python "script" folder is in your path variable
+* "'poker_start.py' is not recognized as an internal or external command, operable program or batch file."
+  * Your terminal needs to be able to find the file. For windows, you need to ensure your python "script" folder is in your path variable
   For example: C:\Users\{username}\AppData\Roaming\Python\{pythonversion}\Scripts
   You may also navigate to where the pip was installed and run poker_start.py with python manually.
 
